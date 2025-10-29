@@ -8,7 +8,8 @@
             font-family: 'Arial', sans-serif; 
             margin: 0; 
             padding: 0; 
-            background-color: #f5f5f5;
+            background-color: #f8fafc;
+            color: #333;
         }
         .container { 
             max-width: 1200px; 
@@ -18,65 +19,186 @@
         .header { 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px 0;
+            padding: 60px 0;
             text-align: center;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
         }
         .nav { 
             background: white; 
-            padding: 15px; 
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            padding: 20px; 
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
         .nav a { 
-            margin-right: 20px; 
             text-decoration: none; 
             color: #667eea;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
         .nav a:hover { 
-            color: #764ba2; 
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
         .event-card {
             background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .event-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .event-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        .event-body {
+            padding: 25px;
+        }
+        .event-description {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .event-details {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #475569;
+        }
+        .event-detail i {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .event-actions {
+            display: flex;
+            gap: 12px;
         }
         .btn {
-            background: #667eea;
-            color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
         }
-        .btn:hover {
-            background: #764ba2;
+        .btn-primary {
+            background: #667eea;
+            color: white;
         }
-        .status-list {
-            list-style: none;
-            padding: 0;
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
         }
-        .status-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+        .no-events {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .no-events h3 {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        .stats {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin: 0;
+            font-weight: 700;
+        }
+        .stat-item p {
+            color: #64748b;
+            margin: 5px 0 0 0;
+            font-weight: 600;
+        }
+        .icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <div class="header">
-            <h1>🎉 Smart Event Management System</h1>
-            <p>Phase 2: Event Management System Active! ✅</p>
+            <h1>🎉 Smart Event Management</h1>
+            <p>Discover and register for amazing upcoming events</p>
         </div>
 
-        <!-- ✅ Updated Navigation -->
+        <!-- Navigation -->
         <div class="nav">
             <a href="/">Home</a>
             <a href="/events/list">All Events</a>
@@ -84,32 +206,68 @@
             <a href="/registrations/all">View Registrations</a>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-            <div>
-                <h2>🚀 System Status</h2>
-                <ul class="status-list">
-                    <li>✅ Spring Boot Setup</li>
-                    <li>✅ MySQL Configuration</li>
-                    <li>✅ Thymeleaf Templates</li>
-                    <li>✅ Event Management</li>
-                    <li>🔜 Registration System</li>
-                    <li>🔜 Feedback Collection</li>
-                </ul>
-                
-                <a href="/events/new" class="btn">Create Your First Event</a>
+        <!-- Upcoming Events Section -->
+        <h2 class="section-title">📅 Upcoming Events</h2>
+        
+        <div th:if="${upcomingEvents.empty}">
+            <div class="no-events">
+                <h3>No upcoming events at the moment</h3>
+                <p>Be the first to create an amazing event!</p>
+                <a href="/events/new" class="btn btn-primary" style="display: inline-block; width: auto; margin-top: 15px;">
+                    Create Your First Event
+                </a>
             </div>
+        </div>
 
-            <div>
-                <h2>📅 Upcoming Events</h2>
-                <div th:if="${upcomingEvents.empty}">
-                    <p>No upcoming events. <a href="/events/new">Create one now!</a></p>
-                </div>
-                <div th:each="event : ${upcomingEvents}" class="event-card">
+        <div class="events-grid" th:unless="${upcomingEvents.empty}">
+            <div th:each="event : ${upcomingEvents}" class="event-card">
+                <div class="event-header">
                     <h3 th:text="${event.name}">Event Name</h3>
-                    <p th:text="${event.description}">Event Description</p>
-                    <p><strong>📅 Date:</strong> <span th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd HH:mm')}"></span></p>
-                    <p><strong>📍 Location:</strong> <span th:text="${event.location}"></span></p>
-                    <p><strong>👥 Max Attendees:</strong> <span th:text="${event.maxAttendees}"></span></p>
+                </div>
+                <div class="event-body">
+                    <p class="event-description" th:text="${event.description}">Event description will appear here...</p>
+                    
+                    <div class="event-details">
+                        <div class="event-detail">
+                            <span class="icon">📅</span>
+                            <span th:text="${#temporals.format(event.eventDate, 'EEE, MMM dd, yyyy • hh:mm a')}">Date & Time</span>
+                        </div>
+                        <div class="event-detail">
+                            <span class="icon">📍</span>
+                            <span th:text="${event.location}">Event Location</span>
+                        </div>
+                        <div class="event-detail">
+                            <span class="icon">👥</span>
+                            <span th:text="${event.registrationCount} + ' / ' + ${event.maxAttendees} + ' registered'">Attendees</span>
+                        </div>
+                    </div>
+                    
+                    <div class="event-actions">
+                        <a th:href="@{/registrations/register/{eventId}(eventId=${event.id})}" class="btn btn-primary">
+                            Register Now
+                        </a>
+                        <a th:href="@{/events/view/{id}(id=${event.id})}" class="btn btn-secondary">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats Section -->
+        <div class="stats" th:if="${!upcomingEvents.empty}">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 th:text="${upcomingEvents.size()}">0</h3>
+                    <p>Upcoming Events</p>
+                </div>
+                <div class="stat-item">
+                    <h3 th:text="${totalRegistrations}">0</h3>
+                    <p>Total Registrations</p>
+                </div>
+                <div class="stat-item">
+                    <h3 th:text="${uniqueAttendees}">0</h3>
+                    <p>Unique Attendees</p>
                 </div>
             </div>
         </div>
