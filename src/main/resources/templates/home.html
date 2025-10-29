@@ -120,6 +120,7 @@
         .event-actions {
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .btn {
             padding: 12px 24px;
@@ -198,12 +199,13 @@
             <p>Discover and register for amazing upcoming events</p>
         </div>
 
-        <!-- Navigation -->
+        <!-- ✅ Navigation Bar -->
         <div class="nav">
             <a href="/">Home</a>
             <a href="/events/list">All Events</a>
             <a href="/events/new">Create Event</a>
             <a href="/registrations/all">View Registrations</a>
+            <a href="/feedback/all">View Feedback</a>
         </div>
 
         <!-- Upcoming Events Section -->
@@ -248,6 +250,12 @@
                         </a>
                         <a th:href="@{/events/view/{id}(id=${event.id})}" class="btn btn-secondary">
                             View Details
+                        </a>
+                        <!-- ✅ Added Feedback Button -->
+                        <a th:if="${event.eventDate.isBefore(T(java.time.LocalDateTime).now())}" 
+                           th:href="@{/feedback/submit/{eventId}(eventId=${event.id})}" 
+                           class="btn btn-secondary">
+                            📝 Give Feedback
                         </a>
                     </div>
                 </div>

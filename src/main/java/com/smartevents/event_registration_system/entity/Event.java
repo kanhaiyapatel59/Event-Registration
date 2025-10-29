@@ -10,35 +10,39 @@ import java.util.List;
 @Entity
 @Table(name = "events")
 public class Event {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotBlank(message = "Event name is required")
     @Column(nullable = false)
     private String name;
-    
+
     @NotBlank(message = "Description is required")
     @Column(columnDefinition = "TEXT")
     private String description;
-    
+
     @NotNull(message = "Event date is required")
     private LocalDateTime eventDate;
-    
+
     @NotBlank(message = "Location is required")
     private String location;
-    
+
     private int maxAttendees;
-    
+
     @Column(updatable = false)
     private LocalDateTime createdAt;
-    
+
     private LocalDateTime updatedAt;
 
     // ✅ Relationship with Registration entity
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Registration> registrations = new ArrayList<>();
+
+    // ✅ Relationship with Feedback entity
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     // Constructors
     public Event() {
@@ -72,6 +76,25 @@ public class Event {
                 .count();
     }
 
+    // ✅ Average Rating Method
+    public double getAverageRating() {
+        if (feedbacks == null || feedbacks.isEmpty()) {
+            return 0.0;
+        }
+        return feedbacks.stream()
+                .filter(Feedback::isApproved)
+                .mapToInt(Feedback::getRating)
+                .average()
+                .orElse(0.0);
+    }
+
+    // ✅ Feedback Count Method
+    public int getFeedbackCount() {
+        return (int) feedbacks.stream()
+                .filter(Feedback::isApproved)
+                .count();
+    }
+
     // ✅ Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -99,4 +122,7 @@ public class Event {
 
     public List<Registration> getRegistrations() { return registrations; }
     public void setRegistrations(List<Registration> registrations) { this.registrations = registrations; }
+
+    public List<Feedback> getFeedbacks() { return feedbacks; }
+    public void setFeedbacks(List<Feedback> feedbacks) { this.feedbacks = feedbacks; }
 }

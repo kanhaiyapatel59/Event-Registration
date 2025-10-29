@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Feedback</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .event-info { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .error { color: red; font-size: 14px; }
+        .btn { background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #764ba2; }
+        .alert { padding: 10px; border-radius: 4px; margin-bottom: 20px; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .rating-stars { display: flex; gap: 10px; margin: 10px 0; }
+        .star { font-size: 24px; cursor: pointer; color: #ddd; }
+        .star.selected { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit Feedback</h1>
+        
+        <a th:href="@{/events/list}">← Back to Events</a>
+
+        <div class="event-info">
+            <h3 th:text="${event.name}">Event Name</h3>
+            <p><strong>Date:</strong> <span th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+            <p><strong>Location:</strong> <span th:text="${event.location}"></span></p>
+        </div>
+
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+        <form th:action="@{/feedback/submit}" th:object="${feedback}" method="post">
+            <input type="hidden" th:field="*{event.id}"/>
+            
+            <div class="form-group">
+                <label for="attendeeName">Your Name *</label>
+                <input type="text" id="attendeeName" th:field="*{attendeeName}" required>
+                <div th:if="${#fields.hasErrors('attendeeName')}" th:errors="*{attendeeName}" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" th:field="*{email}" required>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Rating (1-5 stars) *</label>
+                <select id="rating" th:field="*{rating}" required>
+                    <option value="">Select Rating</option>
+                    <option value="1">⭐ - Poor</option>
+                    <option value="2">⭐⭐ - Fair</option>
+                    <option value="3">⭐⭐⭐ - Good</option>
+                    <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                    <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                </select>
+                <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Your Feedback *</label>
+                <textarea id="comments" th:field="*{comments}" rows="6" placeholder="Please share your experience with this event..." required></textarea>
+                <div th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}" class="error"></div>
+            </div>
+
+            <button type="submit" class="btn">Submit Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        // Simple star rating enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingSelect = document.getElementById('rating');
+            if (ratingSelect) {
+                ratingSelect.addEventListener('change', function() {
+                    // You can add visual feedback here if needed
+                });
+            }
+        });
+    </script>
+</body>
+</html>

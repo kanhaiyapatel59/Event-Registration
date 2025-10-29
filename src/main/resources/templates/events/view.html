@@ -51,6 +51,11 @@
             <a th:href="@{/registrations/event/{eventId}(eventId=${event.id})}" class="btn">
                 View All Registrations
             </a>
+
+            <!-- ✅ Added Submit Feedback Button -->
+            <a th:href="@{/feedback/submit/{eventId}(eventId=${event.id})}" class="btn" style="background: #17a2b8;">
+                📝 Submit Feedback
+            </a>
         </div>
 
         <div class="registrations">

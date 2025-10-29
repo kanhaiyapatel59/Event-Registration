@@ -93,6 +93,7 @@
                 <a th:href="@{/events/view/{id}(id=${event.id})}" class="btn">View</a>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}" class="btn">Edit</a>
                 <a th:href="@{/registrations/register/{eventId}(eventId=${event.id})}" class="btn btn-success">Register</a>
+                <a th:href="@{/feedback/event/{eventId}(eventId=${event.id})}" class="btn" style="background: #17a2b8;">View Feedback</a>
                 <a th:href="@{/events/delete/{id}(id=${event.id})}" class="btn btn-danger"
                    onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
             </div>
