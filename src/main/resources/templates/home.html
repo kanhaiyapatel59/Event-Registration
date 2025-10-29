@@ -199,13 +199,31 @@
             <p>Discover and register for amazing upcoming events</p>
         </div>
 
-        <!-- ✅ Navigation Bar -->
+        <!-- ✅ Updated Navigation Bar -->
         <div class="nav">
-            <a href="/">Home</a>
+            <a href="/home">Home</a>
             <a href="/events/list">All Events</a>
-            <a href="/events/new">Create Event</a>
-            <a href="/registrations/all">View Registrations</a>
-            <a href="/feedback/all">View Feedback</a>
+            
+            <!-- Show admin links only for admin users -->
+            <a th:if="${isAdmin}" href="/events/new">Create Event</a>
+            <a th:if="${isAdmin}" href="/registrations/all">View Registrations</a>
+            <a th:if="${isAdmin}" href="/feedback/all">View Feedback</a>
+            
+            <!-- Show user info and logout if logged in -->
+            <div style="margin-left: auto; display: flex; align-items: center; gap: 15px;" 
+                th:if="${currentUser}">
+                <span style="color: #667eea; font-weight: bold;">
+                    Welcome, <span th:text="${currentUser}"></span>
+                    <span th:if="${isAdmin}" style="background: #ffc107; color: #000; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 5px;">ADMIN</span>
+                </span>
+                <a href="/logout" class="btn" style="background: #e53e3e; padding: 8px 16px; font-size: 14px;">Logout</a>
+            </div>
+            
+            <!-- Show login/register links if not logged in -->
+            <div style="margin-left: auto;" th:unless="${currentUser}">
+                <a href="/login" class="btn" style="margin-right: 10px;">Login</a>
+                <a href="/register" class="btn" style="background: #28a745;">Register</a>
+            </div>
         </div>
 
         <!-- Upcoming Events Section -->
