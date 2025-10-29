@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register for Event</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .event-info { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .error { color: red; font-size: 14px; }
+        .btn { background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #764ba2; }
+        .alert { padding: 10px; border-radius: 4px; margin-bottom: 20px; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register for Event</h1>
+        
+        <a href="/events/list">← Back to Events</a>
+
+        <!-- Event Information -->
+        <div class="event-info" th:if="${event != null}">
+            <h3 th:text="${event.name}">Event Name</h3>
+            <p><strong>Date:</strong> <span th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd HH:mm')}">Event Date</span></p>
+            <p><strong>Location:</strong> <span th:text="${event.location}">Event Location</span></p>
+            <p><strong>Available Spots:</strong> 
+                <span th:text="${availableSpots != null ? availableSpots : event.maxAttendees}">0</span> / 
+                <span th:text="${event.maxAttendees}">0</span>
+            </p>
+        </div>
+
+        <!-- Error Message -->
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+        <!-- Registration Form -->
+        <form th:action="@{/registrations/register}" th:object="${registration}" method="post" th:if="${event != null}">
+            <input type="hidden" th:field="*{event.id}"/>
+            
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" th:field="*{fullName}" required>
+                <div th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" th:field="*{email}" required>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" th:field="*{phoneNumber}">
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company/Organization</label>
+                <input type="text" id="company" th:field="*{company}">
+            </div>
+
+            <button type="submit" class="btn">Register for Event</button>
+        </form>
+
+        <!-- Show if event not found -->
+        <div th:if="${event == null}">
+            <p style="color: red;">Event not found. Please go back and select a valid event.</p>
+        </div>
+    </div>
+</body>
+</html>

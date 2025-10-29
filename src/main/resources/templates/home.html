@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Management System</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f5f5f5;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .header { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .nav { 
+            background: white; 
+            padding: 15px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .nav a { 
+            margin-right: 20px; 
+            text-decoration: none; 
+            color: #667eea;
+            font-weight: bold;
+        }
+        .nav a:hover { 
+            color: #764ba2; 
+        }
+        .event-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .status-list {
+            list-style: none;
+            padding: 0;
+        }
+        .status-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Smart Event Management System</h1>
+            <p>Phase 2: Event Management System Active! ✅</p>
+        </div>
+
+        <!-- ✅ Updated Navigation -->
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/events/list">All Events</a>
+            <a href="/events/new">Create Event</a>
+            <a href="/registrations/all">View Registrations</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <h2>🚀 System Status</h2>
+                <ul class="status-list">
+                    <li>✅ Spring Boot Setup</li>
+                    <li>✅ MySQL Configuration</li>
+                    <li>✅ Thymeleaf Templates</li>
+                    <li>✅ Event Management</li>
+                    <li>🔜 Registration System</li>
+                    <li>🔜 Feedback Collection</li>
+                </ul>
+                
+                <a href="/events/new" class="btn">Create Your First Event</a>
+            </div>
+
+            <div>
+                <h2>📅 Upcoming Events</h2>
+                <div th:if="${upcomingEvents.empty}">
+                    <p>No upcoming events. <a href="/events/new">Create one now!</a></p>
+                </div>
+                <div th:each="event : ${upcomingEvents}" class="event-card">
+                    <h3 th:text="${event.name}">Event Name</h3>
+                    <p th:text="${event.description}">Event Description</p>
+                    <p><strong>📅 Date:</strong> <span th:text="${#temporals.format(event.eventDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+                    <p><strong>📍 Location:</strong> <span th:text="${event.location}"></span></p>
+                    <p><strong>👥 Max Attendees:</strong> <span th:text="${event.maxAttendees}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
