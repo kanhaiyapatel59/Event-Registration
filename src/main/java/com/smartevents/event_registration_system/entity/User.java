@@ -27,7 +27,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    // REMOVE @NotBlank from firstName - we'll generate it from fullName
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 

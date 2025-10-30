@@ -36,11 +36,11 @@ public class Event {
 
     private LocalDateTime updatedAt;
 
-    // ✅ Relationship with Registration entity
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Registration> registrations = new ArrayList<>();
 
-    // ✅ Relationship with Feedback entity
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Feedback> feedbacks = new ArrayList<>();
 
@@ -69,14 +69,14 @@ public class Event {
         updatedAt = LocalDateTime.now();
     }
 
-    // ✅ Registration count method
+   
     public int getRegistrationCount() {
         return (int) registrations.stream()
                 .filter(reg -> "REGISTERED".equalsIgnoreCase(reg.getStatus()))
                 .count();
     }
 
-    // ✅ Average Rating Method
+ 
     public double getAverageRating() {
         if (feedbacks == null || feedbacks.isEmpty()) {
             return 0.0;
@@ -88,14 +88,13 @@ public class Event {
                 .orElse(0.0);
     }
 
-    // ✅ Feedback Count Method
     public int getFeedbackCount() {
         return (int) feedbacks.stream()
                 .filter(Feedback::isApproved)
                 .count();
     }
 
-    // ✅ Getters and Setters
+ 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

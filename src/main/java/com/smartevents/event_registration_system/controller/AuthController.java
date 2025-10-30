@@ -49,19 +49,19 @@ public class AuthController {
 
         logger.info("Starting registration process for user: {}", user.getUsername());
 
-        // ✅ Check if username already exists
+        //  Check if username already exists
         if (userRepository.existsByUsername(user.getUsername())) {
             logger.warn("Username already exists: {}", user.getUsername());
             result.rejectValue("username", "error.user", "Username already exists");
         }
 
-        // ✅ Check if email already exists
+        // ✅Check if email already exists
         if (userRepository.existsByEmail(user.getEmail())) {
             logger.warn("Email already exists: {}", user.getEmail());
             result.rejectValue("email", "error.user", "Email already registered");
         }
 
-        // ✅ Check if contact number already exists
+        // Check if contact number already exists
         if (userRepository.existsByContactNumber(user.getContactNumber())) {
             logger.warn("Contact number already exists: {}", user.getContactNumber());
             result.rejectValue("contactNumber", "error.user", "Contact number already registered");
@@ -80,7 +80,7 @@ public class AuthController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRole("USER");
 
-            // ✅ Handle name fields - ensure firstName is set
+            //  Handle name fields - ensure firstName is set
             if (user.getFullName() != null && !user.getFullName().isEmpty()) {
                 String[] nameParts = user.getFullName().split(" ", 2);
                 user.setFirstName(nameParts[0]); // First name
@@ -98,16 +98,16 @@ public class AuthController {
                 user.setLastName("");
             }
 
-            // ✅ Ensure contact number is not null
+            // Ensure contact number is not null
             if (user.getContactNumber() == null || user.getContactNumber().isEmpty()) {
                 user.setContactNumber("000-000-0000");
             }
 
-            // ✅ Default location values
+            // Default location values
             user.setLatitude(0.0);
             user.setLongitude(0.0);
 
-            // ✅ Save user
+            // Save user
             logger.info("Attempting to save user: {}", user.getUsername());
             userRepository.save(user);
             logger.info("User saved successfully: {}", user.getUsername());

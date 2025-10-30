@@ -25,7 +25,7 @@ public class RegistrationController {
     @Autowired
     private EventRepository eventRepository;
 
-    // ✅ Show registration form for an event
+    // Show registration form for an event
     @GetMapping("/register/{eventId}")
     public String showRegistrationForm(@PathVariable Long eventId, Model model) {
         try {
@@ -56,7 +56,7 @@ public class RegistrationController {
         }
     }
 
-    // ✅ Handle registration form submission
+  
     @PostMapping("/register")
     public String registerForEvent(@Valid @ModelAttribute Registration registration,
                                   BindingResult result,
@@ -107,7 +107,7 @@ public class RegistrationController {
         return "redirect:/events/list";
     }
 
-    // ✅ View all registrations (admin view)
+    // View all registrations (admin view)
     @GetMapping("/all")
     public String viewAllRegistrations(Model model) {
         try {
@@ -121,7 +121,7 @@ public class RegistrationController {
         }
     }
 
-    // ✅ View registrations for a specific event
+    // View registrations for a specific event
     @GetMapping("/event/{eventId}")
     public String viewEventRegistrations(@PathVariable Long eventId, Model model) {
         Optional<Event> event = eventRepository.findById(eventId);
@@ -135,7 +135,7 @@ public class RegistrationController {
         }
     }
 
-    // ✅ Cancel a registration
+    // Cancel a registration
     @GetMapping("/cancel/{registrationId}")
     public String cancelRegistration(@PathVariable Long registrationId, RedirectAttributes redirectAttributes) {
         Optional<Registration> registration = registrationRepository.findById(registrationId);
@@ -148,7 +148,7 @@ public class RegistrationController {
         return "redirect:/registrations/all";
     }
 
-    // ✅ Delete a registration
+    // Delete a registration
     @GetMapping("/delete/{registrationId}")
     public String deleteRegistration(@PathVariable Long registrationId, RedirectAttributes redirectAttributes) {
         registrationRepository.deleteById(registrationId);
@@ -156,7 +156,7 @@ public class RegistrationController {
         return "redirect:/registrations/all";
     }
 
-    // ✅ View user's registrations and provide feedback
+    // View user's registrations and provide feedback
     @GetMapping("/my-registrations")
     public String viewMyRegistrations(@RequestParam String email, Model model) {
         List<Registration> registrations = registrationRepository.findByEmailOrderByRegistrationDateDesc(email);

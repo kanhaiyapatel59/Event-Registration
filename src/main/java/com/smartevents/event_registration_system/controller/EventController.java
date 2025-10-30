@@ -23,15 +23,15 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
-    // ✅ Registration repository for fetching event registrations
+    // Registration repository for fetching event registrations
     @Autowired
     private RegistrationRepository registrationRepository;
 
-    // ✅ Feedback repository for fetching event feedbacks
+    //  Feedback repository for fetching event feedbacks
     @Autowired
     private FeedbackRepository feedbackRepository;
 
-    // ✅ Display all events
+    // Display all events
     @GetMapping("/list")
     public String listEvents(Model model) {
         List<Event> events = eventRepository.findAllByOrderByEventDateAsc();
@@ -39,14 +39,14 @@ public class EventController {
         return "events/list";
     }
 
-    // ✅ Show form to create new event
+    // Show form to create new event
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("event", new Event());
         return "events/create";
     }
 
-    // ✅ Handle form submission for new event
+    // Handle form submission for new event
     @PostMapping("/create")
     public String createEvent(@Valid @ModelAttribute Event event, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -56,7 +56,7 @@ public class EventController {
         return "redirect:/events/list";
     }
 
-    // ✅ Show form to edit event
+    // Show form to edit event
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Optional<Event> event = eventRepository.findById(id);
@@ -68,7 +68,7 @@ public class EventController {
         }
     }
 
-    // ✅ Handle form submission for editing event
+    // Handle form submission for editing event
     @PostMapping("/update/{id}")
     public String updateEvent(@PathVariable Long id, @Valid @ModelAttribute Event event, BindingResult result) {
         if (result.hasErrors()) {
@@ -79,14 +79,14 @@ public class EventController {
         return "redirect:/events/list";
     }
 
-    // ✅ Delete event
+    // Delete event
     @GetMapping("/delete/{id}")
     public String deleteEvent(@PathVariable Long id) {
         eventRepository.deleteById(id);
         return "redirect:/events/list";
     }
 
-    // ✅ View event details and registrations
+    //  View event details and registrations
     @GetMapping("/view/{id}")
     public String viewEvent(@PathVariable Long id, Model model) {
         Optional<Event> event = eventRepository.findById(id);
@@ -104,7 +104,7 @@ public class EventController {
         }
     }
 
-    // ✅ New: View event feedback and ratings
+    //  New: View event feedback and ratings
     @GetMapping("/feedback/{id}")
     public String viewEventFeedback(@PathVariable Long id, Model model) {
         Optional<Event> event = eventRepository.findById(id);

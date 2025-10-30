@@ -24,12 +24,12 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model, Authentication authentication) {
-        // Get upcoming events
+      
         List<Event> upcomingEvents = eventRepository.findByEventDateAfterOrderByEventDateAsc(LocalDateTime.now());
         
         model.addAttribute("upcomingEvents", upcomingEvents);
         
-        // Add user info if logged in
+
         if (authentication != null && authentication.isAuthenticated()) {
             model.addAttribute("currentUser", authentication.getName());
             model.addAttribute("isAdmin", authentication.getAuthorities().stream()

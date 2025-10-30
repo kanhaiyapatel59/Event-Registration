@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
     
-    // Add this method for contact number check
+
     boolean existsByContactNumber(String contactNumber);
 }
